@@ -15,7 +15,7 @@ async function getReportGa(startDate, endDate) {
     const analyticsDataClient = new BetaAnalyticsDataClient({
         credentials: {
             client_email: process.env.CLIENT_EMAIL,
-            private_key: process.env.PRIVATE_KEY,
+            private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
         },
     });
 
@@ -29,16 +29,16 @@ async function getReportGa(startDate, endDate) {
         ],
         dimensions: [
             {
-                name: 'defaultChannelGrouping',
+                name: 'deviceCategory',
             },
             {
-                name: 'sourceMedium',
-            },
-            {
-                name: 'sessionCampaignId',
+                name: 'date',
             },
         ],
         metrics: [
+            {
+                name: 'totalRevenue',
+            },
             {
                 name: 'sessions',
             },
@@ -49,23 +49,18 @@ async function getReportGa(startDate, endDate) {
                 name: 'engagementRate',
             },
             {
-                name: 'totalRevenue',
-            },
-            {
-                name: 'userConversionRate',
+                name: 'addToCarts',
             },
         ],
     });
 
     return response.rows.map(row => ({
-        channelGrouping: row.dimensionValues[0].value,
-        sourceMedium: row.dimensionValues[1].value,
-        campaign: row.dimensionValues[2].value,
-        sessions: row.metricValues[0].value,
-        totalUsers: row.metricValues[1].value,
-        engagementRate: row.metricValues[2].value,
-        totalRevenue: row.metricValues[3].value,
-        userConversionRate: row.metricValues[4].value,
+        totalRevenue: "€ " + Math.round(row.metricValues[0]?.value * 100) / 100 , // Rounded to two decimal places
+        sessions: row.metricValues[1]?.value,
+        totalUsers: row.metricValues[2]?.value,
+        engagementRate: row.metricValues[3]?.value,
+        channelGrouping: row.dimensionValues[0]?.value,
+        sourceMedium: row.dimensionValues[1]?.value,
     }));
 }
 

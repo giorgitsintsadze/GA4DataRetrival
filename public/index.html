@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Google Analytics Data</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/script.js"></script>
+    <title>Google Analytics Report</title>
+    <style>
+        /* Add your custom styles here */
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1>Google Analytics Data</h1>
+<h1>Google Analytics Report</h1>
 
+<form id="dateRangeForm">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" required>
+    <br>
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate" required>
+    <br>
+    <button type="submit">Generate Report</button>
+</form>
+
+<div id="reportContainer">
+    <h2>Business Narration:</h2>
+    <p id="narration"></p>
 </div>
+
+<script src="js/script.js"></script>
 </body>
 </html>

@@ -1,8 +1,6 @@
 const express = require("express");
 require('dotenv').config();
-
-const getReportGa = require('./app/getDataFromGA');
-
+const getReportGa = require('./app/getDataFromGA'); // Update the import statement to match the filename
 
 const app = express();
 const port = 3000;
@@ -13,25 +11,19 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html");
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on port http://localhost:${port}`);
-});
+app.get("/report", async (req, res) => {
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
 
-
-let startDate = "2023-01-01";
-let endDate = "2023-01-07"
-
-async function runReport() {
     try {
         const reportData = await getReportGa(startDate, endDate);
-        // Use the reportData as needed
-        console.log(reportData);
+        res.json({ reportData });
     } catch (error) {
-        // Handle any errors that occurred during the report retrieval
         console.error(error);
+        res.status(500).json({ error: "Failed to generate the report." });
     }
-}
+});
 
-
-
-runReport();
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
