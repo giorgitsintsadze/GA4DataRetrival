@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Google Analytics Report</title>
-    <style>
-        /* Add your custom styles here */
-    </style>
+    <title>Business Report</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-<h1>Google Analytics Report</h1>
+<h1>Business Report</h1>
 
-<form id="dateRangeForm">
+<form id="reportForm">
     <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" name="startDate" required>
-    <br>
+    <input type="date" id="startDate" name="startDate">
+
     <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" name="endDate" required>
-    <br>
+    <input type="date" id="endDate" name="endDate">
+
     <button type="submit">Generate Report</button>
 </form>
 
-<div id="reportContainer">
-    <h2>Business Narration:</h2>
-    <p id="narration"></p>
-</div>
+<div id="reportContainer"></div>
 
 <script src="js/script.js"></script>
 </body>

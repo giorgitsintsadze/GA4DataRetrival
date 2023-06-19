@@ -1,6 +1,6 @@
 const express = require("express");
 require('dotenv').config();
-const getReportGa = require('./app/getDataFromGA'); // Update the import statement to match the filename
+const {generateReport} = require('./app/getDataFromGA');
 
 const app = express();
 const port = 3000;
@@ -16,7 +16,7 @@ app.get("/report", async (req, res) => {
     const endDate = req.query.endDate;
 
     try {
-        const reportData = await getReportGa(startDate, endDate);
+        const reportData = await generateReport(startDate, endDate);
         res.json({ reportData });
     } catch (error) {
         console.error(error);
@@ -25,5 +25,5 @@ app.get("/report", async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on port http://localhost:${port}`);
 });
