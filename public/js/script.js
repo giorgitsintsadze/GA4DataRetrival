@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reportForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const startDate = document.getElementById('startDate').value;
-        const endDate = document.getElementById('endDate').value;
+        const dateRangeSelect = document.getElementById('dateRange');
+        const dateRange = dateRangeSelect.value;
+
         try {
-            const response = await fetch(`/report?startDate=${startDate}&endDate=${endDate}`);
+            const response = await fetch(`/report?dateRange=${dateRange}`);
             const data = await response.json();
             reportContainer.innerText = data.reportData;
         } catch (error) {
@@ -16,3 +17,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+

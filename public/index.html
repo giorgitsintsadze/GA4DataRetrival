@@ -8,11 +8,12 @@
 <h1>Business Report</h1>
 
 <form id="reportForm">
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" name="startDate">
-
-    <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" name="endDate">
+    <label for="dateRange">Date Range:</label>
+    <select id="dateRange" name="dateRange">
+        <option value="7days">Last 7 days</option>
+        <option value="30days">Last 30 days</option>
+        <option value="90days">Last 90 days</option>
+    </select>
 
     <button type="submit">Generate Report</button>
 </form>

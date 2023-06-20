@@ -1,6 +1,6 @@
 const express = require("express");
 require('dotenv').config();
-const {generateReport} = require('./app/getDataFromGA');
+const { generateReport } = require('./app/getDataFromGA');
 
 const app = express();
 const port = 3000;
@@ -12,14 +12,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/report", async (req, res) => {
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
-
+    const dateRange = req.query.dateRange;
+    
     try {
-        const reportData = await generateReport(startDate, endDate);
+        const reportData = await generateReport(dateRange);
         res.json({ reportData });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ error: "Failed to generate the report." });
     }
 });
